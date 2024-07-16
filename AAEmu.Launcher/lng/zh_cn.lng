@@ -79,7 +79,7 @@
   "tsforcenopatch": "强制跳过补丁",
   "tsfixbin32": "修复bin32和DB文件",
   "fixbin32files": "用{1}中的原始文件覆盖{0}中的所有文件？",
-  "downloadlauncherupdate": "启动器版本为{0}，请点击下载",
+  "downloadlauncherupdate": "启动器有新版本{0}，请点击下载",
   "troubleshootgame": "游戏疑难排解",
   "troubleshootlauncher": "对登录器进行故障排除",
   "defaultlocationwarning": "不建议使用虚拟默认位置，请改用游戏可执行文件的真实位置。您是否仍要使用当前文件？",

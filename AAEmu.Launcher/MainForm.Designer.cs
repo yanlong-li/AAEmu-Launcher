@@ -126,6 +126,7 @@
             this.panelSettings = new System.Windows.Forms.Panel();
             this.bgwNewsFeed = new System.ComponentModel.BackgroundWorker();
             this.bgwServerStatusCheck = new System.ComponentModel.BackgroundWorker();
+            this.bgwCheckForLauncherUpdates = new System.ComponentModel.BackgroundWorker();
             this.bgwPatcher = new System.ComponentModel.BackgroundWorker();
             this.lDownloadLauncherUpdate = new System.Windows.Forms.Label();
             this.cmsDiscord = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -1247,6 +1248,14 @@
             this.bgwPatcher.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwPatcher_DoWork);
             this.bgwPatcher.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwPatcher_ProgressChanged);
             this.bgwPatcher.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwPatcher_RunWorkerCompleted);
+
+            // 
+            // bgwCheckForLauncherUpdates
+            // 
+            this.bgwCheckForLauncherUpdates.WorkerReportsProgress = true;
+            this.bgwCheckForLauncherUpdates.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwCheckForLauncherUpdates_DoWork);
+            this.bgwCheckForLauncherUpdates.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwCheckForLauncherUpdates_RunWorkerCompleted);
+
             // 
             // lDownloadLauncherUpdate
             // 
@@ -1476,6 +1485,7 @@
         private System.Windows.Forms.PictureBox pgbFrontTotal;
         private System.ComponentModel.BackgroundWorker bgwNewsFeed;
         private System.ComponentModel.BackgroundWorker bgwServerStatusCheck;
+        private System.ComponentModel.BackgroundWorker bgwCheckForLauncherUpdates;
         private System.ComponentModel.BackgroundWorker bgwPatcher;
         private System.Windows.Forms.Label lPatchProgressBarText;
         private System.Windows.Forms.RadioButton rbInit;

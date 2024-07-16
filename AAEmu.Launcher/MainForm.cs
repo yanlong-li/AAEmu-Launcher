@@ -106,6 +106,9 @@ namespace AAEmu.Launcher
             [JsonProperty("autoLaunch", NullValueHandling = NullValueHandling.Ignore)]
             public bool AutoLaunch { get; set; } = false;
 
+            [JsonProperty("launcherUpdateURL", NullValueHandling = NullValueHandling.Ignore)]
+            public string LauncherUpdateURL { get; set; } = urlCheckLauncherUpdate;
+
 
             public LauncherFileSettings()
             {
@@ -1033,6 +1036,15 @@ namespace AAEmu.Launcher
                                 break;
                             case "u": // User
                                 Setting.LastLoginUser = val;
+                                break;
+                            case "U": // Launcher Version Update
+                                Setting.LauncherUpdateURL = val;
+                                break;
+                            case "L": // LauncherLang
+                                Setting.LauncherLang = val;
+                                break;
+                            case "l": // Lang
+                                Setting.Lang = val;
                                 break;
                             case "p": // Pass
                                 Setting.LastLoginPass = val;
@@ -2197,9 +2209,15 @@ namespace AAEmu.Launcher
             checkedForLauncherUpdates = true;
             urlLauncherUpdateDownload = "";
             LauncherUpdateVersion = "";
+
+            if( Setting.LauncherUpdateURL == "")
+            {
+                return;
+            }
+
             try
             {
-                string verfile = WebHelper.SimpleGetURIAsString(urlCheckLauncherUpdate,5000);
+                string verfile = WebHelper.SimpleGetURIAsString(Setting.LauncherUpdateURL,5000);
                 verfile = verfile.Replace("\r", "");
                 List<string> sl = new List<string>();
                 sl.AddRange(verfile.Split('\n').ToList());
@@ -2216,13 +2234,14 @@ namespace AAEmu.Launcher
                     return;
                 if (urlline[0] != "url")
                     return;
+
                 LauncherUpdateVersion = verline[1];
-                urlLauncherUpdateDownload = urlline[1];
 
                 if (LauncherUpdateVersion.CompareTo(AppVersion) > 0)
                 {
-                    lDownloadLauncherUpdate.Text = string.Format(L.DownloadLauncherUpdate, LauncherUpdateVersion);
-                    lDownloadLauncherUpdate.Visible = true;
+                    urlLauncherUpdateDownload = urlline[1];
+                    //lDownloadLauncherUpdate.Text = string.Format(L.DownloadLauncherUpdate, LauncherUpdateVersion);
+                    //lDownloadLauncherUpdate.Visible = true;
                 }
             }
             catch
@@ -2252,7 +2271,8 @@ namespace AAEmu.Launcher
 
             if (checkedForLauncherUpdates == false)
             {
-                CheckForLauncherUpdates();
+                //CheckForLauncherUpdates();
+                bgwCheckForLauncherUpdates.RunWorkerAsync();
             }
 
             if (nextServerCheck > 0)
@@ -2716,6 +2736,24 @@ namespace AAEmu.Launcher
             UpdatePlayButton(serverCheckStatus, false);
         }
 
+        private void bgwCheckForLauncherUpdates_DoWork(object sender, DoWorkEventArgs e)
+        {
+            CheckForLauncherUpdates();
+        }
+        private void bgwCheckForLauncherUpdates_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            try
+            {
+                if (urlLauncherUpdateDownload!="") { 
+                    lDownloadLauncherUpdate.Text = string.Format(L.DownloadLauncherUpdate, LauncherUpdateVersion);
+                    lDownloadLauncherUpdate.Visible = true;
+                }
+            }
+            catch
+            {
+
+            }
+        }
         private List<AAPakFileInfo> CreateXlFileListFromStream(Stream aStream)
         {
             List<AAPakFileInfo> res = new List<AAPakFileInfo>();

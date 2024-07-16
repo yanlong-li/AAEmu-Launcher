@@ -196,24 +196,27 @@
     <None Include="FodyWeavers.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="lng\de.lng">
+    <Content Include="lng\se_sv.lng">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="lng\fr.lng">
+    </Content>
+    <Content Include="lng\de.lng">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="lng\ru.lng">
+    </Content>
+    <Content Include="lng\fr.lng">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="lng\en_us.lng">
+    </Content>
+    <Content Include="lng\ru.lng">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="lng\zh_cn.lng">
+    </Content>
+    <Content Include="lng\en_us.lng">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="lng\zh_tw.lng">
+    </Content>
+    <Content Include="lng\zh_cn.lng">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
+    <Content Include="lng\zh_tw.lng">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\app.manifest" />
     <None Include="settings.aelcf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -259,9 +262,6 @@
   <ItemGroup>
     <Content Include="aaemu.ico" />
     <None Include="Res\flag_se_sv.png" />
-    <None Include="lng\se_sv.lng">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Res\mini_locale_unknown.png" />
     <None Include="Res\flag_traditional_chinese.png" />
     <None Include="Res\mini_locale_traditional_chinese.png" />
