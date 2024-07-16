@@ -3046,8 +3046,8 @@ namespace AAEmu.Launcher
             bgwPatcher.ReportProgress(0, aaPatcher);
 
             // First sort both to speed things up
-            pak.Files.Sort();
-            remotePakFileList.Sort();
+            //pak.Files.Sort();
+            //remotePakFileList.Sort();
 
             long totSize = 0;
             for (int i = 0; i < remotePakFileList.Count; i++)
