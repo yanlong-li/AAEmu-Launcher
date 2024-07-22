@@ -3057,7 +3057,7 @@ namespace AAEmu.Launcher
                 // Don't download empty files or entries marked as directories (-1)
                 if (r.Size <= 0) continue;
 
-                var l = FindPatchFileInSortedList(r.Name, pak.Files);
+                var l = pak.Files.Find(x=>x.Name==r.Name);
                 if (l == null)
                 {
                     // We don't have a local copy of this file
