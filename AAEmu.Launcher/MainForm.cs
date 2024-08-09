@@ -109,6 +109,9 @@ namespace AAEmu.Launcher
             [JsonProperty("launcherUpdateURL", NullValueHandling = NullValueHandling.Ignore)]
             public string LauncherUpdateURL { get; set; } = urlCheckLauncherUpdate;
 
+            [JsonProperty("gameId", NullValueHandling = NullValueHandling.Ignore)]
+            public ushort GameId { get; set; } = 0;
+
 
             public LauncherFileSettings()
             {
@@ -1065,9 +1068,17 @@ namespace AAEmu.Launcher
                                 Setting.ServerGameUpdateURL = val;
                                 Setting.AllowGameUpdates = true;
                                 break;
+                            case "g": // GameId
+                                Setting.GameId = Convert.ToUInt16(val);
+                                break;
+                            case "s": // GameId
+                                Setting.AutoLaunch = Convert.ToBoolean(val);
+                                break;
                         }
                     }
                     lLoadedConfig.Text = Setting.ConfigName;
+                    eLogin.Text = Setting.LastLoginUser;
+                    ePassword.Text = Setting.LastLoginPass;
 
                     UpdatePanelLabels();
                 }
@@ -1426,10 +1437,11 @@ namespace AAEmu.Launcher
                     UpdateGameSystemConfigFile(GuessDocumentsFolder(Setting.PathToGame), Setting.UpdateLocale, Setting.Lang, Setting.SkipIntro);
 
                     aaLauncher.UserName = eLogin.Text;
-                    aaLauncher.SetPassword(ePassword.Text);
+                    aaLauncher.SetPassword(ePassword.Text, AppOpenMode == LauncherOpenMode.OpenServerURI);
                     aaLauncher.LoginServerAdress = serverIP;
                     aaLauncher.LoginServerPort = serverPort;
                     aaLauncher.GameExeFilePath = Setting.PathToGame;
+                    aaLauncher.GameId = Setting.GameId;
                     // if (Setting.UpdateLocale)
                         aaLauncher.Locale = Setting.Lang;
                     aaLauncher.HShieldArgs = "+acpxmk";

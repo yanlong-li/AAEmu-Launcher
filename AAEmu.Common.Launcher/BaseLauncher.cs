@@ -30,7 +30,9 @@ namespace AAEmu.Launcher.Basic
 
         protected bool SupportsArcheWorld { get; set; }
 
-        static public List<AALauncherContainer> AllLaunchers = new List<AALauncherContainer>();
+        public ushort GameId { get; set; }
+
+        public static List<AALauncherContainer> AllLaunchers = new List<AALauncherContainer>();
 
         public AAEmuLauncherBase()
         {
@@ -61,8 +63,14 @@ namespace AAEmu.Launcher.Basic
             Dispose();
         }
 
-        public virtual bool SetPassword(string userPassword)
+        public virtual bool SetPassword(string userPassword, bool hashed = false)
         {
+            if (hashed)
+            {
+                _passwordHash = userPassword;
+                return true;
+            }
+
             try
             {
                 byte[] data = Encoding.Default.GetBytes(userPassword);
@@ -73,6 +81,7 @@ namespace AAEmu.Launcher.Basic
             {
                 return false;
             }
+
             return true;
         }
 

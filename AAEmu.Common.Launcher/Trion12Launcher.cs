@@ -110,6 +110,8 @@ namespace AAEmu.Launcher.Trion12
                 ticketDataString += "<storeToken>1</storeToken>";
                 ticketDataString += "<username>" + UserName + "</username>";
                 ticketDataString += "<password>" + _passwordHash + "</password>";
+                ticketDataString += "<locale>" + Locale + "</locale>";
+                ticketDataString += "<gameId>" + GameId  + "</gameId>";
                 ticketDataString += "</authTicket>";
             }
 
